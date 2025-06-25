@@ -1,0 +1,21 @@
+# Exclude source and dev files from npm package
+src/
+test/
+node_modules/
+webpack.config.js
+
+# IDE & system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+
+# Env
+.env
