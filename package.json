@@ -1,6 +1,6 @@
 {
   "name": "forgeid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scalable and secure unique ID generator with HMAC verification and time-based growth.",
   "main": "dist/forgeid.min.js",
   "types": "dist/forgeid.d.ts",
@@ -22,6 +22,14 @@
   ],
   "author": "NeaByteLab",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeaByteLab/ForgeID.git"
+  },
+  "homepage": "https://www.npmjs.com/package/forgeid",
+  "bugs": {
+    "url": "https://github.com/NeaByteLab/ForgeID/issues"
+  },
   "devDependencies": {
     "chai": "^5.2.0",
     "mocha": "^11.7.1",
