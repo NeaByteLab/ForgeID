@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const ForgeID = require('../src/forgeid')
+const ForgeID = require('../dist/forgeid.min.js')
 
 describe('ForgeID', () => {
   const secret = 'unit-test-secret'
