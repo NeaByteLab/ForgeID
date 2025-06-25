@@ -1,0 +1,32 @@
+{
+  "name": "forgeid",
+  "version": "1.0.0",
+  "description": "Scalable and secure unique ID generator with HMAC verification and time-based growth.",
+  "main": "dist/forgeid.min.js",
+  "types": "dist/forgeid.d.ts",
+  "scripts": {
+    "build": "mkdir -p dist && cp src/forgeid.js dist/ && cp src/forgeid.d.ts dist/",
+    "test": "mocha"
+  },
+  "files": [
+    "dist/"
+  ],
+  "keywords": [
+    "id",
+    "uuid",
+    "unique-id",
+    "secure-id",
+    "hmac",
+    "generator",
+    "forgeid"
+  ],
+  "author": "NeaByteLab",
+  "license": "MIT",
+  "devDependencies": {
+    "terser-webpack-plugin": "^5.3.14",
+    "mocha": "^11.7.1",
+    "chai": "^5.2.0",
+    "mocha": "^11.7.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
