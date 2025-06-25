@@ -1,41 +1,54 @@
 const { expect } = require('chai')
 const ForgeID = require('../src/forgeid')
 
-describe('ForgeID Generator', () => {
+describe('ForgeID', () => {
   const secret = 'unit-test-secret'
   const forge = new ForgeID(secret)
 
-  it('should generate a valid ID', () => {
+  it('should generate a valid raw ID', () => {
     const id = forge.generate()
     expect(id).to.be.a('string')
     expect(id.length).to.be.greaterThan(10)
+    expect(forge.verify(id)).to.be.true
   })
 
-  it('should verify a valid ID correctly', () => {
-    const id = forge.generate()
-    const valid = forge.verify(id)
-    expect(valid).to.be.true
+  it('should generate and verify ID with prefix', () => {
+    const id = forge.generate('TRX')
+    expect(id.startsWith('TRX-')).to.be.true
+    expect(forge.verify(id)).to.be.true
+  })
+
+  it('should generate and verify dash formatted ID', () => {
+    const id = forge.generate('ORD', 'dash')
+    expect(id).to.include('-')
+    expect(forge.verify(id)).to.be.true
+  })
+
+  it('should generate and verify space formatted ID', () => {
+    const id = forge.generate('REF', 'space')
+    expect(id).to.include(' ')
+    expect(forge.verify(id)).to.be.true
   })
 
   it('should reject a tampered ID', () => {
     const id = forge.generate()
-    const broken = id.slice(0, -1) + 'x'
-    const valid = forge.verify(broken)
-    expect(valid).to.be.false
+    const modified = id.slice(0, -1) + 'x'
+    expect(forge.verify(modified)).to.be.false
   })
 
-  it('should return false for empty or invalid input', () => {
+  it('should return false for empty or invalid inputs', () => {
     expect(forge.verify()).to.be.false
     expect(forge.verify('')).to.be.false
-    expect(forge.verify(12345)).to.be.false
+    expect(forge.verify(null)).to.be.false
+    expect(forge.verify(123)).to.be.false
   })
 
-  it('should generate unique IDs (no duplicates in 10000)', () => {
-    const set = new Set()
+  it('should generate unique IDs (10K)', () => {
+    const seen = new Set()
     for (let i = 0; i < 10000; i++) {
       const id = forge.generate()
-      expect(set.has(id)).to.be.false
-      set.add(id)
+      expect(seen.has(id)).to.be.false
+      seen.add(id)
     }
   })
 })
