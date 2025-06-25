@@ -48,7 +48,7 @@ console.log('Verified:', isValid)
 ## 🎨 With Prefix & Format
 
 ```js
-forge.generate('TRX')                 // TRX-abc123xyz...
+forge.generate('TRX')                // TRX-abc123xyz...
 forge.generate('ORD', 'dash')        // ORD-abc123-def456...
 forge.generate('REF', 'space')       // REF abc123 def456...
 ```
@@ -143,6 +143,32 @@ Produces:
 
 - `dist/forgeid.min.js` → minified bundle  
 - `dist/forgeid.d.ts` → TypeScript definitions
+
+---
+
+## 📊 Benchmark
+
+ForgeID can generate 1 million unique, verifiable IDs in under 25 seconds with zero duplicates.
+
+### ⏱️ Time vs Keys Generated
+![Benchmark Time](./benchmark/benchmark_time.png)
+
+### 🧠 RAM Usage vs Keys Generated
+![Benchmark RAM](./benchmark/benchmark_ram.png)
+
+<sub>Tested on macOS + Node.js v24.2.0, M3 CPU.</sub>
+
+---
+
+## 📁 Project Structure
+
+```
+ForgeID/
+├── src/              → main ForgeID logic (ES5)
+├── dist/             → minified + .d.ts output (for publishing)
+├── test/             → unit tests
+├── benchmark/        → benchmark script, JSON & PNG chart
+```
 
 ---
 
