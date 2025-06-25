@@ -23,9 +23,9 @@ async function benchmark() {
       })
     }
   }
-  fs.writeFileSync('benchmark.json', JSON.stringify(results, null, 2))
+  fs.writeFileSync('./benchmark/benchmark.json', JSON.stringify(results, null, 2))
   const csv = `keys,seconds,ramMB\n` + results.map(r => `${r.keys},${r.seconds},${r.ramMB}`).join('\n')
-  fs.writeFileSync('benchmark.csv', csv)
+  fs.writeFileSync('./benchmark/benchmark.csv', csv)
   console.log('\n✅ Benchmark finished')
 }
 
