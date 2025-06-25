@@ -1,52 +1,52 @@
 [
   {
     "keys": 100000,
-    "seconds": 2.33,
-    "ramMB": 18.53
+    "seconds": 2.37,
+    "ramMB": 15.52
   },
   {
     "keys": 200000,
-    "seconds": 4.72,
-    "ramMB": 31.43
+    "seconds": 4.79,
+    "ramMB": 36.35
   },
   {
     "keys": 300000,
-    "seconds": 7.03,
-    "ramMB": 32.51
+    "seconds": 7.14,
+    "ramMB": 37.38
   },
   {
     "keys": 400000,
-    "seconds": 9.47,
-    "ramMB": 46.51
+    "seconds": 9.56,
+    "ramMB": 51.2
   },
   {
     "keys": 500000,
-    "seconds": 11.85,
-    "ramMB": 60.51
+    "seconds": 12.01,
+    "ramMB": 65.22
   },
   {
     "keys": 600000,
-    "seconds": 14.27,
-    "ramMB": 63
+    "seconds": 14.42,
+    "ramMB": 67.8
   },
   {
     "keys": 700000,
-    "seconds": 16.66,
-    "ramMB": 108.48
+    "seconds": 16.71,
+    "ramMB": 113.21
   },
   {
     "keys": 800000,
-    "seconds": 19.06,
-    "ramMB": 90.71
+    "seconds": 19.01,
+    "ramMB": 95.39
   },
   {
     "keys": 900000,
-    "seconds": 21.43,
-    "ramMB": 136.08
+    "seconds": 21.39,
+    "ramMB": 77.54
   },
   {
     "keys": 1000000,
     "seconds": 23.83,
-    "ramMB": 118.31
+    "ramMB": 122.93
   }
 ]
