@@ -6,6 +6,7 @@
   "types": "dist/forgeid.d.ts",
   "scripts": {
     "build": "webpack && cp src/forgeid.d.ts dist/",
+    "benchmark": "node benchmark/benchmark.js",
     "test": "mocha"
   },
   "files": [
