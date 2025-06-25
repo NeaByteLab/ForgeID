@@ -1,23 +1,15 @@
 declare module 'forgeid' {
-  export interface ForgeIDOptions {
-    secret?: string
-    startYear?: number
-    baseLength?: number
-    intervalYears?: number
-  }
-
-  export class ForgeID {
+  class ForgeID {
     constructor(
-      secret?: string,
+      secretKey?: string,
       startYear?: number,
       baseLength?: number,
       intervalYears?: number
     )
-
-    generate(): string
-    verify(id: string): boolean
-    stressTest(count?: number, step?: number): void
+    generate(prefix?: string, formatStyle?: 'dash' | 'space' | ''): string
+    verify(code: string): boolean
+    format(id: string, style?: 'dash' | 'space' | ''): string
+    stressTest(total?: number, progressStep?: number): void
   }
-
-  export default ForgeID
+  export = ForgeID
 }
