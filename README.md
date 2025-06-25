@@ -5,18 +5,20 @@ Designed to evolve with time and prevent collisions for decades — even millenn
 
 [![NPM Version](https://img.shields.io/npm/v/forgeid.svg)](https://www.npmjs.com/package/forgeid)
 [![License](https://img.shields.io/npm/l/forgeid)](LICENSE)
-[![Build](https://img.shields.io/badge/build-webpack-blue)](webpack.config.js)
+[![Test](https://img.shields.io/badge/tests-passing-brightgreen)](#)
+[![Build](https://img.shields.io/badge/build-manual-blue)](webpack.config.js)
 
 ---
 
 ## ✨ Features
 
-- ✅ Cryptographic uniqueness with HMAC verification
-- 📈 ID length increases with time (configurable growth)
-- 💻 Host fingerprinting support (MAC + hostname)
-- 🔍 Collision-tested with millions of keys
-- 🧪 Built-in verification & stress test
-- 🪶 Lightweight and dependency-free (only uses `crypto` and `os`)
+- ✅ Cryptographically signed (HMAC SHA-256)
+- 🧆 Unique and verifiable
+- 🕰️ ID length grows over time
+- 🔐 Includes timestamp + device fingerprint
+- 🧪 Built-in validation and stress testing
+- 🩸 Zero dependency (only uses `crypto` and `os`)
+- 🎨 Supports prefix and formatting (`dash`, `space`)
 
 ---
 
@@ -28,7 +30,7 @@ npm install forgeid
 
 ---
 
-## 🔧 Usage
+## 🔧 Basic Usage
 
 ```js
 const ForgeID = require('forgeid')
@@ -43,30 +45,91 @@ console.log('Verified:', isValid)
 
 ---
 
-## 📀 ID Format
+## 🎨 With Prefix & Format
 
-Each ID includes:
-- Entropy (from `crypto.randomBytes`)
-- Host fingerprint (MAC + hostname hash)
-- Timestamp (base36)
-- HMAC (SHA-256, last 10 chars)
-
-🧱 **Length** is dynamic:  
-`length = baseLength + floor((currentYear - startYear) / intervalYears)`
-
-Example:
-```
-kfjd9m28txv4ydnnsn20
+```js
+forge.generate('TRX')                 // TRX-abc123xyz...
+forge.generate('ORD', 'dash')        // ORD-abc123-def456...
+forge.generate('REF', 'space')       // REF abc123 def456...
 ```
 
 ---
 
-## 🥪 Stress Testing
+## 📀 ID Structure
+
+Each ID includes:
+- Random entropy from `crypto.randomBytes`
+- Host fingerprint (`hostname + MAC`)
+- Base36 timestamp (`Date.now()`)
+- Signature from HMAC (last 10 characters)
+
+ID format is:
+```
+[prefix-]baseContent + signature
+```
+
+Length increases over time:
+```
+length = baseLength + floor((currentYear - startYear) / intervalYears)
+```
+
+---
+
+## 🧪 Stress Test
 
 ```js
 const forge = new ForgeID('your-secret')
-forge.stressTest(1e6) // generates 1,000,000 IDs, checks for duplicates & HMAC
+forge.stressTest(1e6, 1e5)
 ```
+
+Tests 1 million IDs for:
+- Duplicate collision
+- HMAC signature validity
+
+---
+
+## 🗒️ API
+
+```ts
+new ForgeID(secret?: string, startYear?: number, baseLength?: number, intervalYears?: number)
+
+forge.generate(prefix?: string, format?: 'dash' | 'space' | ''): string
+
+forge.verify(id: string): boolean
+
+forge.format(id: string, style?: 'dash' | 'space' | ''): string
+
+forge.stressTest(total?: number, step?: number): void
+```
+
+---
+
+## ✅ Unit Testing
+
+```bash
+npm install --save-dev mocha chai
+npm test
+```
+
+Test cases cover:
+- Raw ID generation & verification
+- Formatted and prefixed IDs
+- Tampered/invalid inputs
+- Collision-free generation (10K+)
+
+---
+
+## 🧠 TypeScript Support
+
+```ts
+import ForgeID from 'forgeid'
+
+const forge = new ForgeID()
+const id: string = forge.generate('TRX', 'dash')
+const isValid: boolean = forge.verify(id)
+```
+
+Types are defined in `forgeid.d.ts`.
 
 ---
 
@@ -77,22 +140,9 @@ npm run build
 ```
 
 Produces:
-- `dist/forgeid.min.js` → optimized bundle
-- `dist/forgeid.d.ts` → TypeScript typings
 
----
-
-## 🥉 Type Support
-
-If you're using TypeScript or editor IntelliSense:
-
-```ts
-import ForgeID from 'forgeid'
-
-const forge = new ForgeID('secret')
-const id: string = forge.generate()
-const valid: boolean = forge.verify(id)
-```
+- `dist/forgeid.min.js` → minified bundle  
+- `dist/forgeid.d.ts` → TypeScript definitions
 
 ---
 
